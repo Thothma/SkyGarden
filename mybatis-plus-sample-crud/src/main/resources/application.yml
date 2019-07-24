@@ -8,9 +8,10 @@ spring:
     username: root
     password: test
 
-
 # Logger Config
 logging:
   level:
     com.baomidou.mybatisplus.samples: debug
 # MyBatis-Plus 配置该演示无
+server:
+  port: 8081
