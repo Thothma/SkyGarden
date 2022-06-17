@@ -3,6 +3,8 @@ package com.demo.circle;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
 /**
  * @Author: mafei
  * @Date: 2022/6/11 9:00 PM
@@ -34,9 +36,30 @@ public class TestCircle {
      */
     @Test
     public void testCircleMain2() {
-        int i = 1;
-
-
-        log.info("10的阶乘：{}", i);
+        Integer result = anyNumberMultiplied(16);
+        log.info("process on! result:{}", result);
     }
+
+    /**
+     * 任意数字的阶乘 0~15
+     *
+     * @return
+     */
+    public Integer anyNumberMultiplied(Integer number) {
+        Integer resultNum = 1;
+        if (number > 15) {
+            return -1;
+        }
+        for (int i = 2; i <= number; i++) {
+            resultNum = resultNum * i;
+        }
+
+        return resultNum;
+    }
+    /**
+     * 输入任意值 计算它的阶乘 要求: 这个数 > 15 返回 -1
+     *
+     */
+
+
 }
