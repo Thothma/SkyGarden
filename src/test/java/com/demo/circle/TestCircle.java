@@ -10,19 +10,17 @@ import org.junit.jupiter.api.Test;
  **/
 @Slf4j
 public class TestCircle {
-    public static void main(String[] args) {
-        System.out.println("xxx");
-    }
+
     @Test
     public void testCircleMain() {
         for (int j = 1; j < 10; j++) {
             for (int i = 1; i < 10; i++) {
-                if ( j == 5) {
+                if (j == 5) {
                     break;
                 }
                 log.info("{} * {} = {}", i, j, i * j);
             }
-            if ( j == 5) {
+            if (j == 5) {
                 break;
             }
         }
@@ -37,10 +35,8 @@ public class TestCircle {
     @Test
     public void testCircleMain2() {
         int i = 1;
-        for (int j = 1; j < 10; j++) {
-          i = i * j;
-        }
 
-        log.info("10的阶乘：{}",i);
+
+        log.info("10的阶乘：{}", i);
     }
 }
