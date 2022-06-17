@@ -1,6 +1,7 @@
 package com.demo.circle;
 
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -36,18 +37,30 @@ public class TestCircle {
      */
     @Test
     public void testCircleMain2() {
-        Integer result = anyNumberMultiplied(16);
-        log.info("process on! result:{}", result);
+        Integer result = anyNumberMultiplied(1);
+        log.info("process on! request:{}, result:{}", 1, result);
+        Integer result2 = anyNumberMultiplied(15);
+        log.info("process on! request:{}, result:{}", 15, result2);
+        Integer result3 = anyNumberMultiplied(3);
+        log.info("process on! request:{}, result:{}", 3, result3);
+        Integer result4 = anyNumberMultiplied(1000);
+        log.info("process on! request:{}, result:{}", 1000, result4);
+        Integer result5 = anyNumberMultiplied(null);
+        log.info("process on! request:{}, result:{}", null, result5);
+        Integer result6 = anyNumberMultiplied(-100);
+        log.info("process on! request:{}, result:{}", -100, result6);
+
     }
 
     /**
-     * 任意数字的阶乘 0~15
-     *
+     * 任意数字的阶乘 1~15
+     * 输入任意值 计算它的阶乘 要求: 1～15  否则返回 -1
      * @return
      */
     public Integer anyNumberMultiplied(Integer number) {
         Integer resultNum = 1;
-        if (number > 15) {
+        // 程序最主要的是注意边界值、异常值的处理
+        if (number == null || number < 1 || number > 15) {
             return -1;
         }
         for (int i = 2; i <= number; i++) {
@@ -56,10 +69,7 @@ public class TestCircle {
 
         return resultNum;
     }
-    /**
-     * 输入任意值 计算它的阶乘 要求: 这个数 > 15 返回 -1
-     *
-     */
+
 
 
 }
