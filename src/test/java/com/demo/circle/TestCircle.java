@@ -1,10 +1,12 @@
 package com.demo.circle;
 
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * @Author: mafei
@@ -70,6 +72,17 @@ public class TestCircle {
         return resultNum;
     }
 
+    public static List<String> puCartList = Lists.newArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+            "j", "q", "k", "大王", "小王");
 
+    public static String puCartNumber(String puCard) {
+
+        // contains 包含方法 一个对象如果包含在这个集合里返回true否则返回false
+        if (puCartList.contains(puCard)) {
+            return String.valueOf(puCartList.indexOf(puCard) + 1);
+        } else {
+            return "非法输入";
+        }
+    }
 
 }
