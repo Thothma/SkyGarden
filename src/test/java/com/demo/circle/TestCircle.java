@@ -70,7 +70,7 @@ public class TestCircle {
         return resultNum;
     }
 
-    public static List<String> puCartList = Lists.newArrayList("1", "2", "3", "4", "5", "6", "7", "8", "9", "10",
+    public static List<String> puCartList = Lists.newArrayList("1" /*0*/, "2", "3", "4", "5", "6", "7" /*6*/, "8", "9", "10",
             "j", "q", "k", "小王", "大王");
 
     public static String puCartNumber(String puCard) {
@@ -80,6 +80,16 @@ public class TestCircle {
             return String.valueOf(puCartList.indexOf(puCard) + 1);
         } else {
             return "非法输入";
+        }
+    }
+
+    public static String puCartNumberV2(String puCard) {
+
+        int val = puCartList.indexOf(puCard);
+        if (val == -1) {
+            return "非法输入";
+        } else {
+            return String.valueOf(val + 1);
         }
     }
 }
