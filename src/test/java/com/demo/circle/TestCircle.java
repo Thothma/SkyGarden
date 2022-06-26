@@ -74,7 +74,7 @@ public class TestCircle {
             "j", "q", "k", "小王", "大王");
 
     public static String puCartNumber(String puCard) {
-        puCard = puCard.toUpperCase();
+        puCard = puCard.toLowerCase();
         // contains 包含方法 一个对象如果包含在这个集合里返回true否则返回false
         if (puCartList.contains(puCard)) {
             return String.valueOf(puCartList.indexOf(puCard) + 1);
