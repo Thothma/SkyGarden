@@ -73,7 +73,7 @@ public class TestCircle {
     public static List<String> puCartList = Lists.newArrayList("1" /*0*/, "2", "3", "4", "5", "6", "7" /*6*/, "8", "9", "10",
             "j", "q", "k", "小王", "大王");
 
-    public static String puCartNumber(String puCard) {
+    public static String puCartNumberV2(String puCard) {
         //puCard = puCard.toLowerCase();
         // contains 包含方法 一个对象如果包含在这个集合里返回true否则返回false
         if (puCartList.contains(puCard)) {
@@ -83,7 +83,7 @@ public class TestCircle {
         }
     }
 
-    public static String puCartNumberV2(String puCard) {
+    public static String puCartNumber(String puCard) {
 
         int val = puCartList.indexOf(puCard);
         if (val == -1) {
