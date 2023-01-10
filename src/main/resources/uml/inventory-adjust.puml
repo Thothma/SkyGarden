@@ -1,0 +1,55 @@
+@startuml
+actor 加盟商
+加盟商 -> 门店宝前端: 提交库存盘点
+门店宝前端 -> newton_admin: 提交库存盘点
+newton_admin -> wms_inventory: 提交库存盘请求
+wms_inventory -> wms_inventory: 参数校验
+opt 校验失败
+wms_inventory --> newton_admin: 异常返回
+newton_admin --> 门店宝前端: 异常返回
+end
+wms_inventory -> wms_inventory_rds: 根据盘点单号加分布式锁
+opt 加锁失败
+wms_inventory --> newton_admin: 系统繁忙请稍后重试
+newton_admin --> 门店宝前端: 系统繁忙请稍后重试
+end
+wms_inventory -> wms_inventory: 查询幂等表
+opt 已存在幂等操作记录
+wms_inventory -> wms_inventory_rds: 解锁
+wms_inventory --> newton_admin: 操作成功
+newton_admin --> 门店宝前端: 操作成功
+end
+wms_inventory -> 商品中心: 查询商品中心相关数据
+wms_inventory -> wms_inventory: 查询仓库数据
+wms_inventory -> wms_inventory: 商品数据完整性校验
+wms_inventory -> wms_inventory: 仓库数据完整性校验
+opt 校验失败
+wms_inventory -> wms_inventory_rds: 解锁
+wms_inventory --> newton_admin: 异常返回
+newton_admin --> 门店宝前端: 异常返回
+end
+wms_inventory -> wms_inventory_db: 查询库存数据记录
+alt 开始事务
+loop 循环盘点物料明细
+opt 库存项不存在
+wms_inventory -> wms_inventory_db: 初始化库存记录
+end
+wms_inventory -> wms_inventory: 构建库存变动数据
+wms_inventory -> wms_inventory: 构建库存流水数据
+end
+wms_inventory -> wms_inventory_db: 批量更新库存数据
+wms_inventory -> wms_inventory_db: 批量插入流水数据变更
+wms_inventory -> wms_inventory: 构建幂等操作数据
+wms_inventory -> wms_inventory_db: 插入幂等记录
+end
+opt 事务失败
+wms_inventory_db -> wms_inventory_db: 操作回滚
+wms_inventory -> wms_inventory_rds: 解锁
+wms_inventory --> newton_admin: 操作异常请重试
+newton_admin --> 门店宝前端: 操作异常请重试
+end
+wms_inventory -> wms_inventory_rds: 解锁
+wms_inventory --> newton_admin: 库存盘点成功
+newton_admin --> 门店宝前端: 库存盘点成功
+门店宝前端 --> 加盟商: 库存盘点成功
+@enduml

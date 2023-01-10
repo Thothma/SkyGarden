@@ -55,6 +55,7 @@ public class TestCircle {
     /**
      * 任意数字的阶乘 1~15
      * 输入任意值 计算它的阶乘 要求: 1～15  否则返回 -1
+     *
      * @return
      */
     public Integer anyNumberMultiplied(Integer number) {
@@ -92,4 +93,122 @@ public class TestCircle {
             return String.valueOf(val + 1);
         }
     }
+
+    public static String sayColor(String color) {
+
+        if (color.equals("蓝色")) {
+            return "绿色";
+        }
+        if (color.equals("绿色")) {
+            return "蓝色";
+        }
+
+        return color;
+    }
+
+    public static String sayColor2(String color) {
+
+        String result = color;
+        if (color.equals("蓝色")) {
+            result = "绿色";
+        }
+        if (color.equals("绿色")) {
+            result = "蓝色";
+        }
+
+        return result;
+    }
+
+    public static String sayColor3(String color) {
+
+        String result = color;
+        if (color.equals("蓝色")) {
+            result = "绿色";
+        } else if (color.equals("绿色")) {
+            result = "蓝色";
+        }
+
+        return result;
+    }
+
+    @Test
+    public void testSayColor() {
+        log.error(sayColor3("蓝色"));
+    }
+
+
+    public static int multiply(int a, int b) {
+        if (a == 3 && b == 4) {
+            return 16;
+        }
+
+        if (a == 4 && b == 3) {
+            return 16;
+        }
+
+        return a * b;
+    }
+
+    @Test
+    public void testMultiply() {
+        log.error(String.valueOf(multiply(3, 4)));
+        log.error(String.valueOf(multiply(4, 3)));
+        log.error(String.valueOf(multiply(4, 4)));
+        log.error(String.valueOf(multiply(5, 5)));
+    }
+
+    public int getGCD(int a, int b) {
+        // 获取两数中的小数
+        int minValue = a > b ? b : a;
+        // 3 6   3 32 4 16
+        // 开始递增循环 循环到较小数的本身 穷举法
+        int result = 1;
+        for (int i = 2; i <= minValue; i++) {
+            // % 求余数运算符
+            if (a % i == 0 && b % i == 0) {
+                result = i;
+            }
+        }
+
+        return result;
+    }
+
+    @Test
+    public void testGetGCD() {
+        log.error(String.valueOf(getGCD(9, 1)));
+        log.error(String.valueOf(getGCD(9, 4)));
+        log.error(String.valueOf(getGCD(9, 6)));
+        log.error(String.valueOf(getGCD(7, 49)));
+        log.error(String.valueOf(getGCD(12, 16)));
+    }
+
+    public void outputOdd(int number) {
+        for (int i = 1; i <= number; i++) {
+            if (i % 2 != 0) {
+                log.info(String.valueOf(i));
+            }
+        }
+    }
+
+    @Test
+    public void testOutputOdd() {
+        outputOdd(99);
+
+    }
+
+    public void outputEven(int number) {
+        for (int i = 1; i <= number; i++) {
+            if (i % 2 != 0) {
+                continue;
+            }
+            log.info(String.valueOf(i));
+        }
+    }
+
+    @Test
+    public void testOutputEven() {
+        outputEven(99);
+    }
+
+
 }
