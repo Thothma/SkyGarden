@@ -15,7 +15,7 @@ end
 opt 灰度半成品配置为空
     门店生产 -> RocketMQ: 消息提交
 end
-opt 支付时间<今天凌晨
+opt 支付时间<今天凌晨5点
 门店生产 -> RocketMQ: 消息提交
 end
 loop 按消息的半成品列表循环
